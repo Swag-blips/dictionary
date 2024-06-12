@@ -1,0 +1,14 @@
+{
+  "name": "dictionary-webapp",
+  "version": "1.0.0",
+  "description": "This is a repo for the frontend mentor dictionary web app challenge",
+  "main": "script.js",
+  "scripts": {
+    "build": "npx tailwindcss -i ./styles.css -o ./dist/output.css --watch"
+  },
+  "author": "Swag",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.4"
+  }
+}

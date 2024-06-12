@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WordWise - Your Online Dictionary</title>
+    <meta
+      name="description"
+      content="WordWise: A comprehensive online dictionary offering accurate definitions, synonyms, translations, and more. Explore the world of words with us."
+    />
+    <meta
+      name="keywords"
+      content="dictionary, online dictionary, word definitions, synonyms, translations, English dictionary"
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.wordwise.com" />
+
+    <meta property="og:title" content="WordWise - Your Online Dictionary" />
+    <meta
+      property="og:description"
+      content="Explore a vast collection of word definitions, synonyms, and translations with WordWise. Perfect for learners, writers, and language enthusiasts."
+    />
+    <meta
+      property="og:image"
+      content="https://www.wordwise.com/images/wordwise-og-image.jpg"
+    />
+    <meta property="og:url" content="https://www.wordwise.com" />
+    <meta property="og:type" content="website" />
+    <link href="dist/output.css" rel="stylesheet" />
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <!-- navgation -->
+    <nav class="flex items-center justify-between mx-[24px] h-[32px] mt-[24px]">
+      <figure>
+        <img src="./assets/icons/book.svg" alt="book-logo" />
+      </figure>
+      <div class="flex items-center">
+        <div class="flex items-center gap-[16px]">
+          <p class="text-[14px] font-bold text-[#2d2d2d]">Sans Serif</p>
+          <img src="./assets/icons/dropdown.svg" alt="dropdown" />
+        </div>
+
+        <figure class="ml-[16px]">
+          <img src="./assets/icons/separator.svg" alt="separator" />
+        </figure>
+
+        <div class="flex items-center ml-[16px] justify-center gap-[12px]">
+          <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" />
+            <div
+              class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+            ></div>
+          </label>
+          <img src="./assets/icons/moon.svg" alt="dark-mode-toggle" />
+        </div>
+      </div>
+    </nav>
+
+    <!-- navgation Ends -->
+
+    <!-- input section -->
+
+    <section class="mt-[24px] mx-[24px]">
+      <div class="relative">
+        <input
+          name="text"
+          id="text"
+          type="text"
+          placeholder="Enter a word"
+          class="bg-[#F4F4F4] px-[24px] h-[48px] w-full outline-none text-[#2D2D2D] font-bold rounded-[16px] text-[16px]"
+        />
+        <img
+          src="./assets/icons/search.svg"
+          alt="search icon"
+          class="absolute top-1/2 right-[16px] transform -translate-y-1/2"
+        />
+      </div>
+    </section>
+    <!-- input section ends -->
+
+    <section class="mt-[24px] mx-[24px] flex items-center justify-between">
+      <div class="flex justify-center flex-col">
+        <h1 class="font-bold text-[32px]">keyboard</h1>
+        <p class="text-[18px] text-[#A445ED]">/ˈkiːbɔːd/</p>
+      </div>
+
+      <figure
+        class="relative flex items-center justify-center h-[48px] w-[48px] rounded-full overflow-hidden"
+      >
+        <!-- Semi-transparent background overlay -->
+        <div
+          class="absolute inset-0 bg-[#a445ed] opacity-25 z-0 rounded-full"
+        />
+        <!-- Centered image -->
+        <img
+          src="./assets/icons/play.svg"
+          alt="play-text"
+          class="z-10 relative"
+        />
+      </figure>
+    </section>
+  </body>
+</html>
