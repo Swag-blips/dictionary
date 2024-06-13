@@ -761,14 +761,6 @@ video {
   margin-top: 32px;
 }
 
-.mt-\[16p\]{
-  margin-top: 16p;
-}
-
-.mt-\[24px\[\]\]{
-  margin-top: 24px[];
-}
-
 .box-border{
   box-sizing: border-box;
 }
@@ -2653,16 +2645,8 @@ body {
   }
 }
 
-.marker\:text-\[\] *::marker{
-  color: ;
-}
-
 .marker\:text-\[\#8F19E8\] *::marker{
   color: rgb(143 25 232 );
-}
-
-.marker\:text-\[\]::marker{
-  color: ;
 }
 
 .marker\:text-\[\#8F19E8\]::marker{
