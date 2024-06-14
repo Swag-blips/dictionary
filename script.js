@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let mainText = document.getElementById("main-text");
   let phonetics = document.getElementById("phonetics");
   let definitionsContainer = document.getElementById("definitions");
-  let synonymText = document.getElementById("synonym-text");
   let synonymContainer = document.getElementById("synonym-container");
+  let verbContainer = document.getElementById("verb");
   let error = "";
 
   // fetch the word using the searchValue as reference
@@ -19,10 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       displayText(data);
-
-      data[0].meanings.forEach((meaning) => {
-        console.log(meaning.synonyms[0]);
-      });
+      getVerb(data);
     } catch (err) {
       console.log(err);
     }
@@ -58,6 +55,25 @@ document.addEventListener("DOMContentLoaded", () => {
         synonymContainer.appendChild(p2);
       }
     });
+  };
+
+  const getVerb = (value) => {
+    const mainWord = value[0];
+    const verb = mainWord.meanings.find(
+      (meaning) => meaning.partOfSpeech === "verb"
+    );
+    console.log(verb);
+    verbContainer.innerHTML = "";
+    if (verb) {
+      verb.definitions.forEach((definition) => {
+        const li = document.createElement("li");
+
+        li.innerText = definition.definition;
+        verbContainer.appendChild(li);
+      });
+    }
+
+    console.log(verb);
   };
 
   // Test add eventlistener function
