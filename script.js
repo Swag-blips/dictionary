@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let definitionsContainer = document.getElementById("definitions");
   let synonymText = document.getElementById("synonym-text");
   let verbContainer = document.getElementById("verb");
+  let example = document.getElementById("example");
   let meaning = document.getElementById("meaning");
   let source = document.getElementById("source");
   let error = "";
@@ -68,17 +69,42 @@ document.addEventListener("DOMContentLoaded", () => {
       (meaning) => meaning.partOfSpeech === "verb"
     );
     console.log(verb);
-    verbContainer.innerHTML = "";
+
     meaning.innerText = "Meaning";
+    verbContainer.innerHTML = "";
+    example.innerText = "";
+
+    let exampleText = [];
 
     if (verb) {
       verb.definitions.forEach((definition) => {
         const li = document.createElement("li");
+        if (definition.example) {
+          exampleText.push(definition.example);
+        }
+
         li.innerText = definition.definition;
         verbContainer.appendChild(li);
+
+        console.log(definition.example);
       });
     } else {
       meaning.innerText = "😕 oops no verb is available";
+    }
+
+    if (exampleText) {
+      console.log(exampleText);
+      exampleText.splice(1);
+      exampleText.forEach((example) => {
+        const p = document.createElement("p");
+        p.classList.add("mt-[16px]", "text-[15px]", "text-[#757575]");
+        p.innerText = `"${example}"`;
+        verbContainer.appendChild(p);
+      });
+    } else {
+      const p = document.createElement("p");
+      p.classList.add("mt-[16px]", "text-[15px]", "text-[#757575]");
+      p.innerText = " 😕 oops no examples available";
     }
   };
 
