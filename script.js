@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let mainText = document.getElementById("main-text");
   let phonetics = document.getElementById("phonetics");
   let definitionsContainer = document.getElementById("definitions");
-  let synonymContainer = document.getElementById("synonym-container");
+  let synonymText = document.getElementById("synonym-text");
   let verbContainer = document.getElementById("verb");
   let meaning = document.getElementById("meaning");
   let source = document.getElementById("source");
@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mainText.innerText = wordFromData.word;
     phonetics.innerText = wordFromData.phonetics[0].text;
     definitionsContainer.innerHTML = "";
-    synonymContainer.innerHTML = "";
 
     const definitions = wordFromData.meanings[0].definitions.slice(0, 3);
 
@@ -50,19 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const displaySynonyms = (value) => {
     const wordFromData = value[0];
     const synonyms = wordFromData.meanings;
+    synonymText.innerHTML = "";
 
     synonyms.forEach((synonym, index) => {
       let firstSynonym = synonym.synonyms[0];
 
       if (firstSynonym !== undefined && firstSynonym !== null) {
-        let p1 = document.createElement("p");
-        let p2 = document.createElement("p");
-        p1.innerText = "Synonyms";
-        p2.innerText = firstSynonym;
-        p1.classList.add("text-[#757575]", "text-[16px]");
-        p2.classList.add("text-[16px]", "text-[#A445ED]", "opacity-100");
-        synonymContainer.appendChild(p1);
-        synonymContainer.appendChild(p2);
+        synonymText.textContent = firstSynonym;
       }
     });
   };
@@ -70,11 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // function to display verbs
   const displayVerb = (value) => {
     const wordFromData = value[0];
+
     const verb = wordFromData.meanings.find(
       (meaning) => meaning.partOfSpeech === "verb"
     );
     console.log(verb);
     verbContainer.innerHTML = "";
+    meaning.innerText = "Meaning";
+
     if (verb) {
       verb.definitions.forEach((definition) => {
         const li = document.createElement("li");
@@ -84,8 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       meaning.innerText = "😕 oops no verb is available";
     }
-
-    console.log(verb);
   };
 
   const displaySourceUrl = (value) => {
