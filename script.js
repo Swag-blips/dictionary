@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let synonymContainer = document.getElementById("synonym-container");
   let verbContainer = document.getElementById("verb");
   let meaning = document.getElementById("meaning");
+  let source = document.getElementById("source");
   let error = "";
 
   // fetch the word using the searchValue as reference
@@ -22,12 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
       displayDefinitions(data);
       displayVerb(data);
       displaySynonyms(data);
+      displaySourceUrl(data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // function to display text
+  // function to display definitions
   const displayDefinitions = (value) => {
     const wordFromData = value[0];
     mainText.innerText = wordFromData.word;
@@ -36,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     synonymContainer.innerHTML = "";
 
     const definitions = wordFromData.meanings[0].definitions.slice(0, 3);
-    const synonyms = wordFromData.meanings;
 
     definitions.forEach((definition, index) => {
       let li = document.createElement("li");
@@ -45,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // function to display synonyms
   const displaySynonyms = (value) => {
     const wordFromData = value[0];
     const synonyms = wordFromData.meanings;
@@ -65,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // function to display verbs
   const displayVerb = (value) => {
     const wordFromData = value[0];
     const verb = wordFromData.meanings.find(
@@ -79,10 +82,25 @@ document.addEventListener("DOMContentLoaded", () => {
         verbContainer.appendChild(li);
       });
     } else {
-      meaning.innerText = "";
+      meaning.innerText = "😕 oops no verb is available";
     }
 
     console.log(verb);
+  };
+
+  const displaySourceUrl = (value) => {
+    const wordFromData = value[0];
+    source.innerHTML = "";
+
+    if (wordFromData.sourceUrls) {
+      wordFromData.sourceUrls.forEach((sourceUrl) => {
+        source.href = sourceUrl;
+        source.textContent = sourceUrl;
+      });
+    } else {
+      source.href = "";
+      source.textContent = "😕 oops no source is available";
+    }
   };
 
   // Test add eventlistener function
