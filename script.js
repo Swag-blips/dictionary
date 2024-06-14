@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let definitionsContainer = document.getElementById("definitions");
   let synonymContainer = document.getElementById("synonym-container");
   let verbContainer = document.getElementById("verb");
+  let meaning = document.getElementById("meaning");
   let error = "";
 
   // fetch the word using the searchValue as reference
@@ -18,29 +19,36 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(url);
       const data = await response.json();
 
-      displayText(data);
-      getVerb(data);
+      displayDefinitions(data);
+      displayVerb(data);
+      displaySynonyms(data);
     } catch (err) {
       console.log(err);
     }
   };
 
   // function to display text
-  const displayText = (value) => {
-    const mainWord = value[0];
-    mainText.innerText = mainWord.word;
-    phonetics.innerText = mainWord.phonetics[0].text;
+  const displayDefinitions = (value) => {
+    const wordFromData = value[0];
+    mainText.innerText = wordFromData.word;
+    phonetics.innerText = wordFromData.phonetics[0].text;
     definitionsContainer.innerHTML = "";
     synonymContainer.innerHTML = "";
 
-    const definitions = mainWord.meanings[0].definitions.slice(0, 3);
-    const synonyms = mainWord.meanings;
+    const definitions = wordFromData.meanings[0].definitions.slice(0, 3);
+    const synonyms = wordFromData.meanings;
 
     definitions.forEach((definition, index) => {
       let li = document.createElement("li");
       li.innerText = `${definition.definition}`;
       definitionsContainer.appendChild(li);
     });
+  };
+
+  const displaySynonyms = (value) => {
+    const wordFromData = value[0];
+    const synonyms = wordFromData.meanings;
+
     synonyms.forEach((synonym, index) => {
       let firstSynonym = synonym.synonyms[0];
 
@@ -57,9 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const getVerb = (value) => {
-    const mainWord = value[0];
-    const verb = mainWord.meanings.find(
+  const displayVerb = (value) => {
+    const wordFromData = value[0];
+    const verb = wordFromData.meanings.find(
       (meaning) => meaning.partOfSpeech === "verb"
     );
     console.log(verb);
@@ -67,10 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (verb) {
       verb.definitions.forEach((definition) => {
         const li = document.createElement("li");
-
         li.innerText = definition.definition;
         verbContainer.appendChild(li);
       });
+    } else {
+      meaning.innerText = "";
     }
 
     console.log(verb);
