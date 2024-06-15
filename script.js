@@ -158,16 +158,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     playContainer.addEventListener("click", () => {
       audioElement.play();
-      playButton.classList.toggle("hidden");
-      console.log(playButton);
+    });
+
+    audioElement.addEventListener("playing", () => {
+      playButton.classList.add("hidden");
       pauseButton.classList.remove("hidden");
-      console.log(pauseButton);
+      console.log("your audio is playing");
     });
 
     audioElement.addEventListener("ended", () => {
       console.log("Your audio has ended");
       playButton.classList.remove("hidden");
-      pauseButton.classList.toggle("hidden");
+      pauseButton.classList.add("hidden");
     });
 
     console.log(audioElement);
@@ -181,6 +183,8 @@ document.addEventListener("DOMContentLoaded", () => {
         fetchWord(searchValue);
       } else {
         console.log("Enter a valid word");
+        search.classList.remove("focus:border-[1px]", "focus:border-[#A445ED]");
+        search.classList.add("border-[1px]", "border-[#FF5252]");
       }
     }
   };

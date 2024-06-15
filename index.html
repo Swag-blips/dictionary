@@ -63,125 +63,130 @@
 
     <!-- input section -->
 
-    <section class="mt-[24px]">
-      <div class="relative">
-        <input
-          id="search-input"
-          name="text"
-          id="text"
-          type="text"
-          placeholder="Enter a word"
-          class="bg-[#F4F4F4] px-[24px] h-[48px] w-full outline-none text-[#2D2D2D] font-bold rounded-[16px] text-[16px]"
-        />
-        <img
-          src="./assets/icons/search.svg"
-          alt="search icon"
-          class="absolute top-1/2 right-[16px] transform -translate-y-1/2"
-        />
-      </div>
-    </section>
-    <!-- input section ends -->
+    <main>
+      <section class="mt-[24px]">
+        <div class="relative">
+          <input
+            id="search-input"
+            name="text"
+            id="text"
+            type="text"
+            placeholder="Enter a word"
+            class="bg-[#F4F4F4] px-[24px] h-[48px] w-full outline-none focus:border-[1px] focus:border-[#A445ED] text-[#2D2D2D] font-bold rounded-[16px] text-[16px]"
+          />
+          <img
+            src="./assets/icons/search.svg"
+            alt="search icon"
+            class="absolute top-1/2 right-[16px] transform -translate-y-1/2"
+          />
+        </div>
+      </section>
+      <!-- input section ends -->
 
-    <section class="mt-[24px] flex items-center justify-between">
-      <div class="flex justify-center flex-col">
-        <h1 id="main-text" class="font-bold text-[32px]">keyboard</h1>
-        <p id="phonetics" class="text-[18px] text-[#A445ED]">/ˈkiːbɔːd/</p>
-      </div>
+      <section class="mt-[24px] flex items-center justify-between">
+        <div class="flex justify-center flex-col">
+          <h1 id="main-text" class="font-bold text-[32px]">keyboard</h1>
+          <p id="phonetics" class="text-[18px] text-[#A445ED]">/ˈkiːbɔːd/</p>
+        </div>
 
-      <figure
-        id="play-container"
-        class="relative flex items-center justify-center h-[48px] w-[48px] rounded-full overflow-hidden"
-      >
-        <!-- Semi-transparent background overlay -->
-        <div
-          class="absolute inset-0 bg-[#a445ed] opacity-25 z-0 rounded-full"
-        ></div>
-        <!-- Centered image -->
-        <img
-          id="play"
-          src="./assets/icons/play.svg"
-          alt="play-icon"
-          class="z-10 relative"
-        />
-        <img
-          id="pause"
-          src="./assets/icons/pause.svg"
-          class="z-10 hidden"
-          alt="pause"
-        />
-        <audio id="play-audio"></audio>
-      </figure>
-    </section>
+        <figure
+          id="play-container"
+          class="relative flex items-center justify-center h-[48px] w-[48px] rounded-full overflow-hidden"
+        >
+          <!-- Semi-transparent background overlay -->
+          <div
+            class="absolute inset-0 bg-[#a445ed] opacity-25 z-0 rounded-full"
+          ></div>
+          <!-- Centered image -->
+          <img
+            id="play"
+            src="./assets/icons/play.svg"
+            alt="play-icon"
+            class="z-10 relative"
+          />
+          <img
+            id="pause"
+            src="./assets/icons/pause.svg"
+            class="z-10 relative hidden"
+            alt="pause"
+          />
+          <audio id="play-audio"></audio>
+        </figure>
+      </section>
 
-    <section class="flex items-center gap-[16px] mt-[32px]">
-      <h1 class="text-[18px] font-bold italic">noun</h1>
-      <hr class="bg-[#E9E9E9] h-[1px] w-full" />
-    </section>
-
-    <section class="mt-[32px] flex flex-col justify-center">
-      <h1 class="font-[16px] text-[#757575]">Meaning</h1>
-
-      <ul
-        id="definitions"
-        class="list-disc marker:text-[#8F19E8] leading-[24px] text-[15px] text-[#2d2d2d] ml-[18px] mt-[16px] flex flex-col justify-center gap-[13px]"
-      >
-        <li>
-          (etc.) A set of keys used to operate a typewriter, computer etc.
-        </li>
-        <li>
-          A component of many instruments including the piano, organ, and
-          harpsichord consisting of usually black and white keys that cause
-          different tones to be produced when struck.
-        </li>
-        <li>
-          A device with keys of a musical keyboard, used to control electronic
-          sound-producing devices which may be built into or separate from the
-          keyboard device.
-        </li>
-      </ul>
-    </section>
-
-    <div id="synonym-container" class="mt-[24px] flex items-center gap-[24px]">
-      <p class="text-[16px] text-[#757575]">Synonyms</p>
-      <p id="synonym-text" class="text-[16px] text-[#A445ED] opacity-100">
-        electronic keyboard
-      </p>
-    </div>
-
-    <section class="flex flex-col justify-center mt-[32px]">
-      <div class="flex items-center gap-[16px]">
-        <p class="text-[18px] font-bold italic">verb</p>
+      <section class="flex items-center gap-[16px] mt-[32px]">
+        <h1 class="text-[18px] font-bold italic">noun</h1>
         <hr class="bg-[#E9E9E9] h-[1px] w-full" />
-      </div>
+      </section>
 
       <section class="mt-[32px] flex flex-col justify-center">
-        <h1 id="meaning" class="font-[16px] text-[#757575]">Meaning</h1>
-        <ul
-          id="verb"
-          class="mt-[16px] list-disc space-y-2 marker:text-[#8F19E8] ml-[18px]"
-        >
-          <li>To type on a computer keyboard</li>
+        <h1 class="font-[16px] text-[#757575]">Meaning</h1>
 
-          <p id="example" class="mt-[16px] text-[15px] text-[#757575]">
-            “Keyboarding is the part of this job I hate the most.”
-          </p>
+        <ul
+          id="definitions"
+          class="list-disc marker:text-[#8F19E8] leading-[24px] text-[15px] text-[#2d2d2d] ml-[18px] mt-[16px] flex flex-col justify-center gap-[13px]"
+        >
+          <li>
+            (etc.) A set of keys used to operate a typewriter, computer etc.
+          </li>
+          <li>
+            A component of many instruments including the piano, organ, and
+            harpsichord consisting of usually black and white keys that cause
+            different tones to be produced when struck.
+          </li>
+          <li>
+            A device with keys of a musical keyboard, used to control electronic
+            sound-producing devices which may be built into or separate from the
+            keyboard device.
+          </li>
         </ul>
       </section>
 
-      <div class="mt-[32px] flex justify-center flex-col">
-        <hr class="bg-[#E9E9E9] h-[1px] w-full" />
+      <div
+        id="synonym-container"
+        class="mt-[24px] flex items-center gap-[24px]"
+      >
+        <p class="text-[16px] text-[#757575]">Synonyms</p>
+        <p id="synonym-text" class="text-[16px] text-[#A445ED] opacity-100">
+          electronic keyboard
+        </p>
+      </div>
 
-        <div class="flex flex-col mt-[24px] justify-center gap-[8px]">
-          <p class="text-[#757575] text-[14px] underline">Source</p>
-          <div class="flex items-center gap-[8px]">
-            <a id="source" class="text-[#2d2d2d] text-[14px] underline">
-              https://en.wiktionary.org/wiki/keyboard
-            </a>
-            <img src="./assets/icons/link.svg" alt="link" />
+      <section class="flex flex-col justify-center mt-[32px]">
+        <div class="flex items-center gap-[16px]">
+          <p class="text-[18px] font-bold italic">verb</p>
+          <hr class="bg-[#E9E9E9] h-[1px] w-full" />
+        </div>
+
+        <section class="mt-[32px] flex flex-col justify-center">
+          <h1 id="meaning" class="font-[16px] text-[#757575]">Meaning</h1>
+          <ul
+            id="verb"
+            class="mt-[16px] list-disc space-y-2 marker:text-[#8F19E8] ml-[18px]"
+          >
+            <li>To type on a computer keyboard</li>
+
+            <p id="example" class="mt-[16px] text-[15px] text-[#757575]">
+              “Keyboarding is the part of this job I hate the most.”
+            </p>
+          </ul>
+        </section>
+
+        <div class="mt-[32px] flex justify-center flex-col">
+          <hr class="bg-[#E9E9E9] h-[1px] w-full" />
+
+          <div class="flex flex-col mt-[24px] justify-center gap-[8px]">
+            <p class="text-[#757575] text-[14px] underline">Source</p>
+            <div class="flex items-center gap-[8px]">
+              <a id="source" class="text-[#2d2d2d] text-[14px] underline">
+                https://en.wiktionary.org/wiki/keyboard
+              </a>
+              <img src="./assets/icons/link.svg" alt="link" />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
     <script src="script.js"></script>
   </body>
