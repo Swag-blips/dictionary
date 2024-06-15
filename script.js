@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let example = document.getElementById("example");
   let meaning = document.getElementById("meaning");
   let source = document.getElementById("source");
+  let audioElement = document.getElementById("play-audio");
   let error = "";
 
   // fetch the word using the searchValue as reference
@@ -21,10 +22,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(url);
       const data = await response.json();
 
+      if (!response) {
+        throw new Error("Network response was not okay");
+      }
+
       displayDefinitions(data);
       displayVerb(data);
       displaySynonyms(data);
       displaySourceUrl(data);
+      loadMusic(data);
     } catch (err) {
       console.log(err);
     }
@@ -121,6 +127,15 @@ document.addEventListener("DOMContentLoaded", () => {
       source.href = "";
       source.textContent = "😕 oops no source is available";
     }
+  };
+
+  const loadMusic = (value) => {
+    const wordFromData = value[0];
+
+    wordFromData.forEach((audioUrl) => {
+      audioElement.src = audioUrl;
+      audioElement.load();
+    });
   };
 
   // Test add eventlistener function
