@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   //get important dom elements
   let search = document.getElementById("search-input");
-  let play = document.getElementById("play");
+  let playContainer = document.getElementById("play-container");
   let mainText = document.getElementById("main-text");
   let phonetics = document.getElementById("phonetics");
   let definitionsContainer = document.getElementById("definitions");
@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let meaning = document.getElementById("meaning");
   let source = document.getElementById("source");
   let audioElement = document.getElementById("play-audio");
+  let playButton = document.getElementById("play");
+  let pauseButton = document.getElementById("pause");
   let error = "";
 
   // fetch the word using the searchValue as reference
@@ -40,8 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const displayDefinitions = (value) => {
     const wordFromData = value[0];
     mainText.innerText = wordFromData.word;
-    phonetics.innerText = wordFromData.phonetics[0].text;
+    const phoneticsText = wordFromData.phonetics[0].text;
     definitionsContainer.innerHTML = "";
+
+    if (phoneticsText) {
+      phonetics.innerText = phoneticsText;
+    } else {
+      phonetics.innerText = "😕 not available";
+    }
 
     const definitions = wordFromData.meanings[0].definitions.slice(0, 3);
 
@@ -132,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const loadSound = (value) => {
     const wordFromData = value[0];
-
     const audioSrcs = [];
 
     wordFromData.phonetics.forEach((audio) => {
@@ -149,6 +156,20 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("no audio sources found");
     }
 
+    playContainer.addEventListener("click", () => {
+      audioElement.play();
+      playButton.classList.toggle("hidden");
+      console.log(playButton);
+      pauseButton.classList.remove("hidden");
+      console.log(pauseButton);
+    });
+
+    audioElement.addEventListener("ended", () => {
+      console.log("Your audio has ended");
+      playButton.classList.remove("hidden");
+      pauseButton.classList.toggle("hidden");
+    });
+
     console.log(audioElement);
   };
 
@@ -164,6 +185,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Test add eventlistener function
+  // event listeners
+
+  // event listener to process api
   search.addEventListener("keydown", handleSubmit);
 });

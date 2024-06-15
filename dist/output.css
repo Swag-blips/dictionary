@@ -2284,6 +2284,10 @@ video {
   opacity: 0.25;
 }
 
+.opacity-0{
+  opacity: 0;
+}
+
 .bg-blend-normal{
   background-blend-mode: normal;
 }
@@ -2720,6 +2724,15 @@ body {
 
 .hover\:font-bold:hover{
   font-weight: 700;
+}
+
+.hover\:text-white:hover{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:opacity-100:hover{
+  opacity: 1;
 }
 
 .before\:hover\:text-center:hover::before{

@@ -89,7 +89,7 @@
       </div>
 
       <figure
-        id="play"
+        id="play-container"
         class="relative flex items-center justify-center h-[48px] w-[48px] rounded-full overflow-hidden"
       >
         <!-- Semi-transparent background overlay -->
@@ -98,9 +98,16 @@
         ></div>
         <!-- Centered image -->
         <img
+          id="play"
           src="./assets/icons/play.svg"
-          alt="play-text"
+          alt="play-icon"
           class="z-10 relative"
+        />
+        <img
+          id="pause"
+          src="./assets/icons/pause.svg"
+          class="z-10 hidden"
+          alt="pause"
         />
         <audio id="play-audio"></audio>
       </figure>
