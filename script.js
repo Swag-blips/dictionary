@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let audioElement = document.getElementById("play-audio");
   let playButton = document.getElementById("play");
   let pauseButton = document.getElementById("pause");
+  let mainSection = document.getElementById("main-section");
   let error = "";
 
   // fetch the word using the searchValue as reference
@@ -180,11 +181,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       let searchValue = search.value.trim();
       if (searchValue) {
+        mainSection.classList.remove("hidden");
         fetchWord(searchValue);
       } else {
         console.log("Enter a valid word");
+        error = "Whoops can't be empty"
         search.classList.remove("focus:border-[1px]", "focus:border-[#A445ED]");
         search.classList.add("border-[1px]", "border-[#FF5252]");
+        mainSection.classList.add("hidden");
+        console.log(mainSection);
       }
     }
   };
