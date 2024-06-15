@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(url);
       const data = await response.json();
 
-      if (!response) {
+      if (!response.ok) {
         throw new Error("Network response was not okay");
       }
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       displayVerb(data);
       displaySynonyms(data);
       displaySourceUrl(data);
-      loadMusic(data);
+      loadSound(data);
     } catch (err) {
       console.log(err);
     }
@@ -91,15 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         li.innerText = definition.definition;
         verbContainer.appendChild(li);
-
-        console.log(definition.example);
       });
     } else {
       meaning.innerText = "😕 oops no verb is available";
     }
 
     if (exampleText) {
-      console.log(exampleText);
       exampleText.splice(1);
       exampleText.forEach((example) => {
         const p = document.createElement("p");
@@ -113,6 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
       p.innerText = " 😕 oops no examples available";
     }
   };
+
+  // function to display source url
 
   const displaySourceUrl = (value) => {
     const wordFromData = value[0];
@@ -129,22 +128,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const loadMusic = (value) => {
+  // function to load sound
+
+  const loadSound = (value) => {
     const wordFromData = value[0];
 
-    wordFromData.forEach((audioUrl) => {
-      audioElement.src = audioUrl;
-      audioElement.load();
+    const audioSrcs = [];
+
+    wordFromData.phonetics.forEach((audio) => {
+      if (audio.audio !== "") {
+        audioSrcs.push(audio);
+      }
     });
+
+    if (audioSrcs) {
+      audioElement.src = audioSrcs[0].audio;
+      console.log(audioSrcs[0].audio);
+      audioElement.load();
+    } else {
+      console.error("no audio sources found");
+    }
+
+    console.log(audioElement);
+  };
+
+  // function to handle submit
+  const handleSubmit = (e) => {
+    if (e.key === "Enter") {
+      let searchValue = search.value.trim();
+      if (searchValue) {
+        fetchWord(searchValue);
+      } else {
+        console.log("Enter a valid word");
+      }
+    }
   };
 
   // Test add eventlistener function
-  play.addEventListener("click", () => {
-    let searchValue = search.value.trim();
-    if (searchValue) {
-      fetchWord(searchValue);
-    } else {
-      console.log("Enter a valid word");
-    }
-  });
+  search.addEventListener("keydown", handleSubmit);
 });
