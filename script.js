@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let playButton = document.getElementById("play");
   let pauseButton = document.getElementById("pause");
   let mainSection = document.getElementById("main-section");
+  let errorText = document.getElementById("error-element");
   let error = "";
 
   // fetch the word using the searchValue as reference
@@ -181,13 +182,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       let searchValue = search.value.trim();
       if (searchValue) {
-        mainSection.classList.remove("hidden");
         fetchWord(searchValue);
+        mainSection.classList.remove("hidden");
+        search.classList.remove("border-[1px]", "border-[#FF5252]");
+        errorText.innerHTML = "";
       } else {
         console.log("Enter a valid word");
-        error = "Whoops can't be empty"
+        error = "Whoops can't be empty";
         search.classList.remove("focus:border-[1px]", "focus:border-[#A445ED]");
         search.classList.add("border-[1px]", "border-[#FF5252]");
+        errorText.innerText = error;
         mainSection.classList.add("hidden");
         console.log(mainSection);
       }

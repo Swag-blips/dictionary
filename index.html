@@ -31,9 +31,11 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   </head>
-  <body class="px-[24px]">
+  <body class="px-[24px] md:px-0 md:w-[736px] md:max-w-[736px] md:mx-auto">
     <!-- navgation -->
-    <nav class="flex items-center justify-between h-[32px] mt-[24px]">
+    <nav
+      class="flex items-center justify-between h-[32px] mt-[24px]"
+    >
       <figure>
         <img src="./assets/icons/book.svg" alt="book-logo" />
       </figure>
@@ -63,8 +65,10 @@
 
     <!-- input section -->
 
-    <section class="mt-[24px]">
-      <div class="relative">
+    <section
+      class="mt-[24px] md:w-full flex flex-col md:items-center md:justify-center"
+    >
+      <div class="relative w-full">
         <input
           id="search-input"
           name="text"
@@ -73,12 +77,17 @@
           placeholder="Enter a word"
           class="bg-[#F4F4F4] px-[24px] h-[48px] w-full outline-none focus:border-[1px] focus:border-[#A445ED] text-[#2D2D2D] font-bold rounded-[16px] text-[16px]"
         />
+
         <img
           src="./assets/icons/search.svg"
           alt="search icon"
           class="absolute top-1/2 right-[16px] transform -translate-y-1/2"
         />
       </div>
+      <p
+        id="error-element"
+        class="md:text-[20px] text-[14px] mt-[8px] text-[#ff5252] text-left"
+      ></p>
     </section>
     <!-- input section ends -->
     <main id="main-section">
