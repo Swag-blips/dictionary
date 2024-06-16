@@ -2,7 +2,13 @@
 module.exports = {
   content: ["./**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "Inter": ["inter", "sans-serif"],
+        "Lora": ["lora", "sans-serif"],
+        "inconsolata": ["inconsolata", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

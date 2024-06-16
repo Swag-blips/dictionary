@@ -31,16 +31,28 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   </head>
-  <body class="px-[24px] md:px-0 md:w-[736px] md:max-w-[736px] md:mx-auto">
+  <body class="px-[24px] lg:w-[736px] font-Inter lg:max-w-[736px] lg:mx-auto">
     <!-- navgation -->
     <nav class="flex items-center justify-between h-[32px] mt-[24px]">
       <figure>
         <img src="./assets/icons/book.svg" alt="book-logo" />
       </figure>
-      <div class="flex items-center">
+      <div class="flex relative items-center">
         <div class="flex items-center gap-[16px]">
-          <p class="text-[14px] font-bold text-[#2d2d2d]">Sans Serif</p>
+          <p class="text-[14px] font-bold cursor-pointer text-[#2d2d2d]">
+            Sans Serif
+          </p>
           <img src="./assets/icons/dropdown.svg" alt="dropdown" />
+        </div>
+
+        <div
+          class="w-[183px] font-bold text-[18px] h-[152px] flex justify-center flex-col gap-[16px] py-[24px] pl-[24px] z-50 rounded-[13px] bg-white absolute top-10 right-[100px] shadow-lg"
+        >
+          <p class="cursor-pointer hover:text-[#A445ED]">Sans Serif</p>
+          <p class="cursor-pointer font-Lora hover:text-[#A445ED]">Serif</p>
+          <p class="cursor-pointer font-inconsolata hover:text-[#A445ED]">
+            Mono
+          </p>
         </div>
 
         <figure class="ml-[16px]">
