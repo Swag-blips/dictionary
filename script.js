@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let pauseButton = document.getElementById("pause");
   let mainSection = document.getElementById("main-section");
   let errorText = document.getElementById("error-element");
+  let error404 = document.getElementById("404-error");
   let error = "";
 
   // fetch the word using the searchValue as reference
@@ -30,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Network response was not okay");
       }
 
+      error404.classList.add("hidden");
+      mainSection.classList.add("block");
+
       displayDefinitions(data);
       displayVerb(data);
       displaySynonyms(data);
@@ -37,6 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
       loadSound(data);
     } catch (err) {
       console.log(err);
+      mainSection.classList.add("hidden");
+      error404.classList.remove("hidden");
+      error404.classList.add("flex");
     }
   };
 
@@ -157,7 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       console.error("no audio sources found");
     }
-
     playContainer.addEventListener("click", () => {
       audioElement.play();
     });
