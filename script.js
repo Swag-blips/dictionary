@@ -212,6 +212,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.body.classList.add(fontName);
+
+    localStorage.setItem("selectedFont", fontName);
+  };
+
+  const applySavedFont = () => {
+    let savedFont = localStorage.getItem("selectedFont");
+
+    if (savedFont) {
+      document.body.classList.add(savedFont);
+    }
   };
 
   // Function to handle submit
@@ -235,10 +245,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Event listeners
+  // Event listeners and functions
   search.addEventListener("keydown", handleSubmit);
   dropdownToggle.addEventListener("click", toggleDropdown);
   serifFont.addEventListener("click", () => switchFont("font-Lora"));
   monoFont.addEventListener("click", () => switchFont("font-inconsolata"));
   sansSerifFont.addEventListener("click", () => switchFont("font-Inter"));
+  applySavedFont();
 });
