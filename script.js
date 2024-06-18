@@ -1,7 +1,7 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-  //get important dom elements
+  // Get important DOM elements
   let search = document.getElementById("search-input");
   let playContainer = document.getElementById("play-container");
   let mainText = document.getElementById("main-text");
@@ -21,9 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let error = "";
   let dropdownToggle = document.getElementById("dropdown-toggle");
   let dropdownSection = document.getElementById("dropdown-section");
+  let sansSerifFont = document.getElementById("sans-serif");
+  let serifFont = document.getElementById("serif");
+  let monoFont = document.getElementById("mono");
   let isToggle = false;
+  let fontPrefix = "font-";
 
-  // fetch the word using the searchValue as reference
+  // Fetch the word using the search value as reference
   const fetchWord = async function (value) {
     try {
       const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${value}`;
@@ -44,13 +48,14 @@ document.addEventListener("DOMContentLoaded", () => {
       loadSound(data);
     } catch (err) {
       console.log(err);
-      mainSection.classList.add("hidden");
       error404.classList.remove("hidden");
+      mainSection.classList.add("hidden");
+
       error404.classList.add("flex");
     }
   };
 
-  // function to display definitions
+  // Function to display definitions
   const displayDefinitions = (value) => {
     const wordFromData = value[0];
     mainText.innerText = wordFromData.word;
@@ -72,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // function to display synonyms
+  // Function to display synonyms
   const displaySynonyms = (value) => {
     const wordFromData = value[0];
     const synonyms = wordFromData.meanings;
@@ -87,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // function to display verbs
+  // Function to display verbs
   const displayVerb = (value) => {
     const wordFromData = value[0];
 
@@ -131,8 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // function to display source url
-
+  // Function to display source URL
   const displaySourceUrl = (value) => {
     const wordFromData = value[0];
     source.innerHTML = "";
@@ -148,8 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // function to load sound
-
+  // Function to load sound
   const loadSound = (value) => {
     const wordFromData = value[0];
     const audioSrcs = [];
@@ -160,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    if (audioSrcs) {
+    if (audioSrcs.length > 0) {
       audioElement.src = audioSrcs[0].audio;
       console.log(audioSrcs[0].audio);
       audioElement.load();
@@ -186,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(audioElement);
   };
 
+  // Function to toggle dropdown
   const toggleDropdown = () => {
     isToggle = !isToggle;
     console.log(isToggle);
@@ -199,7 +203,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // function to handle submit
+  // Function to switch fonts
+  const switchFont = (fontName) => {
+    document.body.classList.forEach((className) => {
+      if (className.startsWith(fontPrefix)) {
+        document.body.classList.remove(className);
+      }
+    });
+
+    document.body.classList.add(fontName);
+  };
+
+  // Function to handle submit
   const handleSubmit = (e) => {
     if (e.key === "Enter") {
       let searchValue = search.value.trim();
@@ -220,9 +235,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // event listeners
-
-  // event listener to process api
+  // Event listeners
   search.addEventListener("keydown", handleSubmit);
   dropdownToggle.addEventListener("click", toggleDropdown);
+  serifFont.addEventListener("click", () => switchFont("font-Lora"));
+  monoFont.addEventListener("click", () => switchFont("font-inconsolata"));
+  sansSerifFont.addEventListener("click", () => switchFont("font-Inter"));
 });

@@ -52,9 +52,16 @@
           id="dropdown-section"
           class="w-[183px] hidden font-bold text-[18px] h-[152px] justify-center flex-col gap-[16px] py-[24px] pl-[24px] z-50 rounded-[13px] bg-white absolute top-10 right-[100px] shadow-lg"
         >
-          <p class="cursor-pointer hover:text-[#A445ED]">Sans Serif</p>
-          <p class="cursor-pointer font-Lora hover:text-[#A445ED]">Serif</p>
-          <p class="cursor-pointer font-inconsolata hover:text-[#A445ED]">
+          <p id="sans-serif" class="cursor-pointer hover:text-[#A445ED]">
+            Sans Serif
+          </p>
+          <p id="serif" class="cursor-pointer font-Lora hover:text-[#A445ED]">
+            Serif
+          </p>
+          <p
+            id="mono"
+            class="cursor-pointer font-inconsolata hover:text-[#A445ED]"
+          >
             Mono
           </p>
         </div>
@@ -124,7 +131,7 @@
 
         <figure
           id="play-container"
-          class="relative flex items-center justify-center h-[48px] w-[48px] rounded-full overflow-hidden"
+          class="relative cursor-pointer flex items-center justify-center h-[48px] w-[48px] rounded-full overflow-hidden"
         >
           <!-- Semi-transparent background overlay -->
           <div
@@ -180,7 +187,10 @@
         class="mt-[24px] flex items-center gap-[24px]"
       >
         <p class="text-[16px] text-[#757575]">Synonyms</p>
-        <p id="synonym-text" class="text-[16px] text-[#A445ED] opacity-100">
+        <p
+          id="synonym-text"
+          class="text-[16px] hover:underline cursor-pointer text-[#A445ED] opacity-100"
+        >
           electronic keyboard
         </p>
       </div>
@@ -211,7 +221,10 @@
           <div class="flex flex-col mt-[24px] justify-center gap-[8px]">
             <p class="text-[#757575] text-[14px] underline">Source</p>
             <div class="flex items-center gap-[8px]">
-              <a id="source" class="text-[#2d2d2d] text-[14px] underline">
+              <a
+                id="source"
+                class="text-[#2d2d2d] cursor-pointer text-[14px] underline"
+              >
                 https://en.wiktionary.org/wiki/keyboard
               </a>
               <img src="./assets/icons/link.svg" alt="link" />

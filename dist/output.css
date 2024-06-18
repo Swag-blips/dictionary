@@ -1487,10 +1487,6 @@ video {
   gap: 8px;
 }
 
-.gap-\[26px\]{
-  gap: 26px;
-}
-
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -2180,6 +2176,10 @@ video {
   font-family: inconsolata, sans-serif;
 }
 
+.font-mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 .text-\[14px\]{
   font-size: 14px;
 }
@@ -2814,6 +2814,10 @@ video {
 .hover\:text-\[\#A445ED\]:hover{
   --tw-text-opacity: 1;
   color: rgb(164 69 237 / var(--tw-text-opacity));
+}
+
+.hover\:underline:hover{
+  text-decoration-line: underline;
 }
 
 .before\:hover\:text-center:hover::before{
