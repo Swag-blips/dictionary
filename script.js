@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let errorText = document.getElementById("error-element");
   let error404 = document.getElementById("404-error");
   let error = "";
+  let dropdownToggle = document.getElementById("dropdown-toggle");
+  let dropdownSection = document.getElementById("dropdown-section");
+  let isToggle = false;
 
   // fetch the word using the searchValue as reference
   const fetchWord = async function (value) {
@@ -183,6 +186,19 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(audioElement);
   };
 
+  const toggleDropdown = () => {
+    isToggle = !isToggle;
+    console.log(isToggle);
+
+    if (isToggle) {
+      dropdownSection.classList.remove("hidden");
+      dropdownSection.classList.add("flex");
+    } else {
+      dropdownSection.classList.add("hidden");
+      dropdownSection.classList.remove("flex");
+    }
+  };
+
   // function to handle submit
   const handleSubmit = (e) => {
     if (e.key === "Enter") {
@@ -208,4 +224,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // event listener to process api
   search.addEventListener("keydown", handleSubmit);
+  dropdownToggle.addEventListener("click", toggleDropdown);
 });
