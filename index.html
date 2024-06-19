@@ -31,7 +31,9 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   </head>
-  <body class="px-[24px] lg:w-[736px] font-Inter lg:max-w-[736px] lg:mx-auto">
+  <body
+    class="px-[24px] lg:w-[736px] dark:bg-[#050505] font-Inter lg:max-w-[736px] lg:mx-auto"
+  >
     <!-- navgation -->
     <nav class="flex items-center justify-between h-[32px] mt-[24px]">
       <figure>
@@ -41,7 +43,7 @@
         <div class="flex items-center gap-[16px]">
           <p
             id="dropdown-toggle"
-            class="text-[14px] font-bold cursor-pointer text-[#2d2d2d]"
+            class="text-[14px] md:text-[18px] font-bold cursor-pointer text-[#2d2d2d] dark:text-white"
           >
             Sans Serif
           </p>
@@ -50,9 +52,12 @@
 
         <div
           id="dropdown-section"
-          class="w-[183px] hidden font-bold text-[18px] h-[152px] justify-center flex-col gap-[16px] py-[24px] pl-[24px] z-50 rounded-[13px] bg-white absolute top-10 right-[100px] shadow-lg"
+          class="w-[183px] hidden font-bold dark:text-white dark:shadow-md darkstext-[18px] h-[152px] dark:bg-[#1F1F1F] justify-center flex-col gap-[16px] py-[24px] pl-[24px] z-50 rounded-[13px] bg-white absolute top-10 right-[100px] shadow-lg"
         >
-          <p id="sans-serif" class="cursor-pointer hover:text-[#A445ED]">
+          <p
+            id="sans-serif"
+            class="cursor-pointer font-Inter hover:text-[#A445ED]"
+          >
             Sans Serif
           </p>
           <p id="serif" class="cursor-pointer font-Lora hover:text-[#A445ED]">
@@ -77,7 +82,12 @@
               class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#A445ED]"
             ></div>
           </label>
-          <img src="./assets/icons/moon.svg" alt="dark-mode-toggle" />
+          <img
+            id="dark-mode-toggle"
+            src="./assets/icons/moon.svg"
+            alt="dark-mode-toggle"
+            class="cursor-pointer dark:text-[#A445ED]"
+          />
         </div>
       </div>
     </nav>
@@ -94,7 +104,7 @@
           id="text"
           type="text"
           placeholder="Enter a word"
-          class="bg-[#F4F4F4] px-[24px] h-[48px] w-full outline-none focus:border-[1px] focus:border-[#A445ED] text-[#2D2D2D] font-bold rounded-[16px] text-[16px]"
+          class="bg-[#F4F4F4] dark:text-white dark:bg-[#1F1F1F] px-[24px] h-[48px] w-full outline-none focus:border-[1px] focus:border-[#A445ED] text-[#2D2D2D] font-bold rounded-[16px] text-[16px]"
         />
 
         <img
@@ -114,7 +124,7 @@
       class="justify-center hidden text-center md:mt-[132px] mt-[40px] flex-col"
     >
       😕
-      <p class="font-bold text-[20px] mt-[44px]">No Definitions Found</p>
+      <p class="font-bold text-[20px] dark:text-white mt-[44px]">No Definitions Found</p>
       <p class="text-[18px] text-[#757575] mt-[24px]">
         Sorry pal, we couldn't find definitions for the word you were looking
         for. You can try the search again at later time or head to the web
@@ -125,13 +135,20 @@
     <main class="" id="main-section">
       <section class="mt-[24px] flex items-center justify-between">
         <div class="flex justify-center flex-col">
-          <h1 id="main-text" class="font-bold text-[32px]">keyboard</h1>
-          <p id="phonetics" class="text-[18px] text-[#A445ED]">/ˈkiːbɔːd/</p>
+          <h1
+            id="main-text"
+            class="font-bold dark:text-white text-[32px] md:text-[64px]"
+          >
+            keyboard
+          </h1>
+          <p id="phonetics" class="text-[18px] md:text-[24px] text-[#A445ED]">
+            /ˈkiːbɔːd/
+          </p>
         </div>
 
         <figure
           id="play-container"
-          class="relative cursor-pointer flex items-center justify-center h-[48px] w-[48px] rounded-full overflow-hidden"
+          class="relative cursor-pointer flex items-center justify-center h-[48px] md:w-[75px] md:h-[75px] w-[48px] rounded-full overflow-hidden"
         >
           <!-- Semi-transparent background overlay -->
           <div
@@ -142,12 +159,12 @@
             id="play"
             src="./assets/icons/play.svg"
             alt="play-icon"
-            class="z-10 relative"
+            class="z-10 md:w-[21px] relative"
           />
           <img
             id="pause"
             src="./assets/icons/pause.svg"
-            class="z-10 relative hidden"
+            class="z-10 md:w-[21px] relative hidden"
             alt="pause"
           />
           <audio id="play-audio"></audio>
@@ -155,16 +172,20 @@
       </section>
 
       <section class="flex items-center gap-[16px] mt-[32px]">
-        <h1 class="text-[18px] font-bold italic">noun</h1>
-        <hr class="bg-[#E9E9E9] h-[1px] w-full" />
+        <h1
+          class="text-[18px] md:text-[24px] font-bold italic md:not-italic dark:text-white"
+        >
+          noun
+        </h1>
+        <hr class="bg-[#E9E9E9] md:bg-[#3A3A3A] h-[1px] w-full" />
       </section>
 
       <section class="mt-[32px] flex flex-col justify-center">
-        <h1 class="font-[16px] text-[#757575]">Meaning</h1>
+        <h1 class="text-[16px] md:text-[20px] text-[#757575]">Meaning</h1>
 
         <ul
           id="definitions"
-          class="list-disc marker:text-[#8F19E8] leading-[24px] text-[15px] text-[#2d2d2d] ml-[18px] mt-[16px] flex flex-col justify-center gap-[13px]"
+          class="list-disc marker:text-[#8F19E8] leading-[24px] text-[15px] md:text-[18px] dark:text-white text-[#2d2d2d] ml-[18px] mt-[16px] flex flex-col justify-center gap-[13px]"
         >
           <li>
             (etc.) A set of keys used to operate a typewriter, computer etc.
@@ -186,10 +207,10 @@
         id="synonym-container"
         class="mt-[24px] flex items-center gap-[24px]"
       >
-        <p class="text-[16px] text-[#757575]">Synonyms</p>
+        <p class="text-[16px] md:text-[20px] text-[#757575]">Synonyms</p>
         <p
           id="synonym-text"
-          class="text-[16px] hover:underline cursor-pointer text-[#A445ED] opacity-100"
+          class="text-[16px] md:text-[20px] hover:underline cursor-pointer text-[#A445ED] opacity-100"
         >
           electronic keyboard
         </p>
@@ -197,33 +218,47 @@
 
       <section class="flex flex-col justify-center mt-[32px]">
         <div class="flex items-center gap-[16px]">
-          <p class="text-[18px] font-bold italic">verb</p>
-          <hr class="bg-[#E9E9E9] h-[1px] w-full" />
+          <p
+            class="text-[18px] md:text-[24px] font-bold italic md:not-italic dark:text-white"
+          >
+            verb
+          </p>
+          <hr class="bg-[#E9E9E9] md:bg-[#3A3A3A] h-[1px] w-full" />
         </div>
 
         <section class="mt-[32px] flex flex-col justify-center">
-          <h1 id="meaning" class="font-[16px] text-[#757575]">Meaning</h1>
+          <h1 id="meaning" class="text-[16px] md:text-[20px] text-[#757575]">
+            Meaning
+          </h1>
           <ul
             id="verb"
             class="mt-[16px] list-disc space-y-2 marker:text-[#8F19E8] ml-[18px]"
           >
-            <li>To type on a computer keyboard</li>
+            <li class="text-[15px] dark:text-white md:text-[18px]">
+              To type on a computer keyboard
+            </li>
 
-            <p id="example" class="mt-[16px] text-[15px] text-[#757575]">
+            <p
+              id="example"
+              class="mt-[16px] text-[15px] md:text-[18px] text-[#757575]"
+            >
               “Keyboarding is the part of this job I hate the most.”
             </p>
           </ul>
         </section>
 
         <div class="mt-[32px] flex justify-center flex-col">
-          <hr class="bg-[#E9E9E9] h-[1px] w-full" />
+          <hr class="bg-[#E9E9E9] md:bg-[#3A3A3A] h-[1px] w-full" />
 
-          <div class="flex flex-col mt-[24px] justify-center gap-[8px]">
+          <div
+            class="flex flex-col md:flex-row md:items-center mt-[24px] gap-[8px]"
+          >
             <p class="text-[#757575] text-[14px] underline">Source</p>
             <div class="flex items-center gap-[8px]">
               <a
                 id="source"
-                class="text-[#2d2d2d] cursor-pointer text-[14px] underline"
+                href="https://en.wiktionary.org/wiki/keyboard"
+                class="text-[#2d2d2d] cursor-pointer dark:text-[#ffffff] text-[14px] underline"
               >
                 https://en.wiktionary.org/wiki/keyboard
               </a>

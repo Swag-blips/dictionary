@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let sansSerifFont = document.getElementById("sans-serif");
   let serifFont = document.getElementById("serif");
   let monoFont = document.getElementById("mono");
+  let darkModeToggle = document.getElementById("dark-mode-toggle");
   let isToggle = false;
   let fontPrefix = "font-";
 
@@ -115,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         li.innerText = definition.definition;
+        li.classList.add("md:text-[18px]", "dark:text-white");
         verbContainer.appendChild(li);
       });
     } else {
@@ -125,13 +127,23 @@ document.addEventListener("DOMContentLoaded", () => {
       exampleText.splice(1);
       exampleText.forEach((example) => {
         const p = document.createElement("p");
-        p.classList.add("mt-[16px]", "text-[15px]", "text-[#757575]");
+        p.classList.add(
+          "mt-[16px]",
+          "text-[15px]",
+          "md:text-[18px]",
+          "text-[#757575]"
+        );
         p.innerText = `"${example}"`;
         verbContainer.appendChild(p);
       });
     } else {
       const p = document.createElement("p");
-      p.classList.add("mt-[16px]", "text-[15px]", "text-[#757575]");
+      p.classList.add(
+        "mt-[16px]",
+        "text-[15px]",
+        "md:text-[18px]",
+        "text-[#757575]"
+      );
       p.innerText = " 😕 oops no examples available";
     }
   };
@@ -152,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Function to load sound
+  // Function to load sound and play sound
   const loadSound = (value) => {
     const wordFromData = value[0];
     const audioSrcs = [];
@@ -216,6 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("selectedFont", fontName);
   };
 
+  // function to call the saved font on page load
   const applySavedFont = () => {
     let savedFont = localStorage.getItem("selectedFont");
 
@@ -224,13 +237,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Function to handle submit
+  // function to call the saved theme on page load
+  const applyTheme = () => {
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
+
+  // function to toggle theme
+  const toggleTheme = () => {
+    let savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme) {
+      if (savedTheme === "light") {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+    } else {
+      if (document.documentElement.classList.contains("dark")) {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      } else {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      }
+    }
+  };
+
+  //fuction to handle submission
   const handleSubmit = (e) => {
     if (e.key === "Enter") {
       let searchValue = search.value.trim();
       if (searchValue) {
         fetchWord(searchValue);
         mainSection.classList.remove("hidden");
+        error404.classList.add("hidden");
         search.classList.remove("border-[1px]", "border-[#FF5252]");
         errorText.innerHTML = "";
       } else {
@@ -251,5 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
   serifFont.addEventListener("click", () => switchFont("font-Lora"));
   monoFont.addEventListener("click", () => switchFont("font-inconsolata"));
   sansSerifFont.addEventListener("click", () => switchFont("font-Inter"));
+  darkModeToggle.addEventListener("click", toggleTheme);
   applySavedFont();
+  applyTheme();
 });
