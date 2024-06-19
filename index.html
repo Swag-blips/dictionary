@@ -77,11 +77,16 @@
 
         <div class="flex items-center ml-[16px] justify-center gap-[12px]">
           <label class="inline-flex items-center cursor-pointer">
-            <input type="checkbox" value="" class="sr-only peer" />
+            <input
+              id="dark-mode-toggle-checkbox"
+              type="checkbox"
+              class="sr-only peer"
+            />
             <div
               class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#A445ED]"
             ></div>
           </label>
+
           <img
             id="dark-mode-toggle"
             src="./assets/icons/moon.svg"
@@ -124,7 +129,9 @@
       class="justify-center hidden text-center md:mt-[132px] mt-[40px] flex-col"
     >
       😕
-      <p class="font-bold text-[20px] dark:text-white mt-[44px]">No Definitions Found</p>
+      <p class="font-bold text-[20px] dark:text-white mt-[44px]">
+        No Definitions Found
+      </p>
       <p class="text-[18px] text-[#757575] mt-[24px]">
         Sorry pal, we couldn't find definitions for the word you were looking
         for. You can try the search again at later time or head to the web

@@ -2902,6 +2902,11 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.peer:checked ~ .dark\:peer-checked\:bg-\[\#A445ED\]:is(.dark *){
+  --tw-bg-opacity: 1;
+  background-color: rgb(164 69 237 / var(--tw-bg-opacity));
+}
+
 @media (min-width: 640px){
   .sm\:underline{
     text-decoration-line: underline;

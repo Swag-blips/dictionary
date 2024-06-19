@@ -1,4 +1,5 @@
 "use strict";
+import { toggleCheckboxTheme, toggleTheme } from "./theme";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Get important DOM elements
@@ -25,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let serifFont = document.getElementById("serif");
   let monoFont = document.getElementById("mono");
   let darkModeToggle = document.getElementById("dark-mode-toggle");
+  const darkModeToggleCheckbox = document.getElementById(
+    "dark-mode-toggle-checkbox"
+  );
   let isToggle = false;
   let fontPrefix = "font-";
 
@@ -241,33 +245,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const applyTheme = () => {
     if (localStorage.getItem("theme") === "dark") {
       document.documentElement.classList.add("dark");
+      darkModeToggleCheckbox.checked = true;
     } else {
       document.documentElement.classList.remove("dark");
+      darkModeToggleCheckbox.checked = false;
     }
   };
 
   // function to toggle theme
-  const toggleTheme = () => {
-    let savedTheme = localStorage.getItem("theme");
 
-    if (savedTheme) {
-      if (savedTheme === "light") {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      }
-    } else {
-      if (document.documentElement.classList.contains("dark")) {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      } else {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      }
-    }
-  };
+  // toggle theme with checkbox
+  const toggleCheckboxTheme = () => {};
 
   //fuction to handle submission
   const handleSubmit = (e) => {
@@ -298,6 +286,11 @@ document.addEventListener("DOMContentLoaded", () => {
   monoFont.addEventListener("click", () => switchFont("font-inconsolata"));
   sansSerifFont.addEventListener("click", () => switchFont("font-Inter"));
   darkModeToggle.addEventListener("click", toggleTheme);
+  darkModeToggleCheckbox.addEventListener(
+    "change",
+    toggleCheckboxTheme(darkModeToggleCheckbox)
+  );
+
   applySavedFont();
   applyTheme();
 });
