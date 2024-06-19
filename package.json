@@ -4,7 +4,7 @@
   "description": "This is a repo for the frontend mentor dictionary web app challenge",
   "main": "script.js",
   "scripts": {
-    "build": "npx tailwindcss -i ./styles.css -o ./dist/output.css --watch"
+    "build": "npx tailwindcss -i ./styles.css -o ./dist/output.css"
   },
   "author": "Swag",
   "license": "ISC",
