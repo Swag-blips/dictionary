@@ -1,3 +1,6 @@
+// function to toggle checkbox theme
+
+
 export const toggleCheckboxTheme = (checkbox) => {
   if (checkbox.checked) {
     document.documentElement.classList.add("dark");
@@ -8,6 +11,7 @@ export const toggleCheckboxTheme = (checkbox) => {
   }
 };
 
+// function to toggle theme
 export const toggleTheme = () => {
   let savedTheme = localStorage.getItem("theme");
 
@@ -27,5 +31,16 @@ export const toggleTheme = () => {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
     }
+  }
+};
+
+// function to call the saved theme on page load
+export const applyTheme = (checkbox) => {
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark");
+    checkbox.checked = true;
+  } else {
+    document.documentElement.classList.remove("dark");
+    checkbox.checked = false;
   }
 };

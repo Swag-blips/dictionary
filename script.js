@@ -1,5 +1,8 @@
 "use strict";
-import { toggleCheckboxTheme, toggleTheme } from "./theme";
+import { displayDefinitions } from "./display.js";
+import { applySavedFont, switchFont } from "./font.js";
+import { loadSound } from "./sound.js";
+import { toggleCheckboxTheme, toggleTheme, applyTheme } from "./theme.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Get important DOM elements
@@ -30,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     "dark-mode-toggle-checkbox"
   );
   let isToggle = false;
-  let fontPrefix = "font-";
 
   // Fetch the word using the search value as reference
   const fetchWord = async function (value) {
@@ -46,41 +48,20 @@ document.addEventListener("DOMContentLoaded", () => {
       error404.classList.add("hidden");
       mainSection.classList.add("block");
 
-      displayDefinitions(data);
+      displayDefinitions(data, mainText, definitionsContainer, phonetics);
       displayVerb(data);
       displaySynonyms(data);
       displaySourceUrl(data);
-      loadSound(data);
+      loadSound(data, audioElement, playContainer, playButton, pauseButton);
     } catch (err) {
       console.log(err);
       error404.classList.remove("hidden");
       mainSection.classList.add("hidden");
-
       error404.classList.add("flex");
     }
   };
 
   // Function to display definitions
-  const displayDefinitions = (value) => {
-    const wordFromData = value[0];
-    mainText.innerText = wordFromData.word;
-    const phoneticsText = wordFromData.phonetics[0].text;
-    definitionsContainer.innerHTML = "";
-
-    if (phoneticsText) {
-      phonetics.innerText = phoneticsText;
-    } else {
-      phonetics.innerText = "😕 not available";
-    }
-
-    const definitions = wordFromData.meanings[0].definitions.slice(0, 3);
-
-    definitions.forEach((definition, index) => {
-      let li = document.createElement("li");
-      li.innerText = `${definition.definition}`;
-      definitionsContainer.appendChild(li);
-    });
-  };
 
   // Function to display synonyms
   const displaySynonyms = (value) => {
@@ -168,43 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Function to load sound and play sound
-  const loadSound = (value) => {
-    const wordFromData = value[0];
-    const audioSrcs = [];
-
-    wordFromData.phonetics.forEach((audio) => {
-      if (audio.audio !== "") {
-        audioSrcs.push(audio);
-      }
-    });
-
-    if (audioSrcs.length > 0) {
-      audioElement.src = audioSrcs[0].audio;
-      console.log(audioSrcs[0].audio);
-      audioElement.load();
-    } else {
-      console.error("no audio sources found");
-    }
-    playContainer.addEventListener("click", () => {
-      audioElement.play();
-    });
-
-    audioElement.addEventListener("playing", () => {
-      playButton.classList.add("hidden");
-      pauseButton.classList.remove("hidden");
-      console.log("your audio is playing");
-    });
-
-    audioElement.addEventListener("ended", () => {
-      console.log("Your audio has ended");
-      playButton.classList.remove("hidden");
-      pauseButton.classList.add("hidden");
-    });
-
-    console.log(audioElement);
-  };
-
   // Function to toggle dropdown
   const toggleDropdown = () => {
     isToggle = !isToggle;
@@ -218,44 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
       dropdownSection.classList.remove("flex");
     }
   };
-
-  // Function to switch fonts
-  const switchFont = (fontName) => {
-    document.body.classList.forEach((className) => {
-      if (className.startsWith(fontPrefix)) {
-        document.body.classList.remove(className);
-      }
-    });
-
-    document.body.classList.add(fontName);
-
-    localStorage.setItem("selectedFont", fontName);
-  };
-
-  // function to call the saved font on page load
-  const applySavedFont = () => {
-    let savedFont = localStorage.getItem("selectedFont");
-
-    if (savedFont) {
-      document.body.classList.add(savedFont);
-    }
-  };
-
-  // function to call the saved theme on page load
-  const applyTheme = () => {
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.classList.add("dark");
-      darkModeToggleCheckbox.checked = true;
-    } else {
-      document.documentElement.classList.remove("dark");
-      darkModeToggleCheckbox.checked = false;
-    }
-  };
-
-  // function to toggle theme
-
-  // toggle theme with checkbox
-  const toggleCheckboxTheme = () => {};
 
   //fuction to handle submission
   const handleSubmit = (e) => {
@@ -285,12 +191,10 @@ document.addEventListener("DOMContentLoaded", () => {
   serifFont.addEventListener("click", () => switchFont("font-Lora"));
   monoFont.addEventListener("click", () => switchFont("font-inconsolata"));
   sansSerifFont.addEventListener("click", () => switchFont("font-Inter"));
-  darkModeToggle.addEventListener("click", toggleTheme);
-  darkModeToggleCheckbox.addEventListener(
-    "change",
+  darkModeToggle.addEventListener("click", () => toggleTheme());
+  darkModeToggleCheckbox.addEventListener("change", () =>
     toggleCheckboxTheme(darkModeToggleCheckbox)
   );
-
   applySavedFont();
-  applyTheme();
+  applyTheme(darkModeToggleCheckbox);
 });
