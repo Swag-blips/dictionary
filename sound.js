@@ -1,6 +1,12 @@
 // Function to load sound and play sound
 
-export const loadSound = (value, element, container, play, pause) => {
+export const loadSound = (
+  value,
+  audioElement,
+  playContainer,
+  playButton,
+  pauseButton
+) => {
   const wordFromData = value[0];
   const audioSrcs = [];
 
@@ -11,26 +17,22 @@ export const loadSound = (value, element, container, play, pause) => {
   });
 
   if (audioSrcs.length > 0) {
-    element.src = audioSrcs[0].audio;
-    element.load();
+    audioElement.src = audioSrcs[0].audio;
+    audioElement.load();
   } else {
     console.error("no audio sources found");
   }
-  container.addEventListener("click", () => {
-    element.play();
+  playContainer.addEventListener("click", () => {
+    audioElement.play();
   });
 
-  element.addEventListener("playing", () => {
-    play.classList.add("hidden");
-    pause.classList.remove("hidden");
-    console.log("your audio is playing");
+  audioElement.addEventListener("playing", () => {
+    playButton.classList.add("hidden");
+    pauseButton.classList.remove("hidden");
   });
 
-  element.addEventListener("ended", () => {
-    console.log("Your audio has ended");
-    play.classList.remove("hidden");
-    pause.classList.add("hidden");
+  audioElement.addEventListener("ended", () => {
+    playButton.classList.remove("hidden");
+    pauseButton.classList.add("hidden");
   });
-
-  console.log(element);
 };

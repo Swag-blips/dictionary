@@ -1,8 +1,14 @@
 "use strict";
-import { displayDefinitions } from "./display.js";
+import {
+  displayDefinitions,
+  displaySourceUrl,
+  displaySynonyms,
+  displayVerb,
+} from "./display.js";
 import { applySavedFont, switchFont } from "./font.js";
 import { loadSound } from "./sound.js";
 import { toggleCheckboxTheme, toggleTheme, applyTheme } from "./theme.js";
+import { toggleDropdown } from "./toggle.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Get important DOM elements
@@ -49,117 +55,15 @@ document.addEventListener("DOMContentLoaded", () => {
       mainSection.classList.add("block");
 
       displayDefinitions(data, mainText, definitionsContainer, phonetics);
-      displayVerb(data);
-      displaySynonyms(data);
-      displaySourceUrl(data);
+      displayVerb(data, meaning, verbContainer, example);
+      displaySynonyms(data, synonymText);
+      displaySourceUrl(data, source);
       loadSound(data, audioElement, playContainer, playButton, pauseButton);
     } catch (err) {
       console.log(err);
       error404.classList.remove("hidden");
       mainSection.classList.add("hidden");
       error404.classList.add("flex");
-    }
-  };
-
-  // Function to display definitions
-
-  // Function to display synonyms
-  const displaySynonyms = (value) => {
-    const wordFromData = value[0];
-    const synonyms = wordFromData.meanings;
-    synonymText.innerHTML = "";
-
-    synonyms.forEach((synonym, index) => {
-      let firstSynonym = synonym.synonyms[0];
-
-      if (firstSynonym !== undefined && firstSynonym !== null) {
-        synonymText.textContent = firstSynonym;
-      }
-    });
-  };
-
-  // Function to display verbs
-  const displayVerb = (value) => {
-    const wordFromData = value[0];
-
-    const verb = wordFromData.meanings.find(
-      (meaning) => meaning.partOfSpeech === "verb"
-    );
-    console.log(verb);
-
-    meaning.innerText = "Meaning";
-    verbContainer.innerHTML = "";
-    example.innerText = "";
-
-    let exampleText = [];
-
-    if (verb) {
-      verb.definitions.forEach((definition) => {
-        const li = document.createElement("li");
-        if (definition.example) {
-          exampleText.push(definition.example);
-        }
-
-        li.innerText = definition.definition;
-        li.classList.add("md:text-[18px]", "dark:text-white");
-        verbContainer.appendChild(li);
-      });
-    } else {
-      meaning.innerText = "😕 oops no verb is available";
-    }
-
-    if (exampleText) {
-      exampleText.splice(1);
-      exampleText.forEach((example) => {
-        const p = document.createElement("p");
-        p.classList.add(
-          "mt-[16px]",
-          "text-[15px]",
-          "md:text-[18px]",
-          "text-[#757575]"
-        );
-        p.innerText = `"${example}"`;
-        verbContainer.appendChild(p);
-      });
-    } else {
-      const p = document.createElement("p");
-      p.classList.add(
-        "mt-[16px]",
-        "text-[15px]",
-        "md:text-[18px]",
-        "text-[#757575]"
-      );
-      p.innerText = " 😕 oops no examples available";
-    }
-  };
-
-  // Function to display source URL
-  const displaySourceUrl = (value) => {
-    const wordFromData = value[0];
-    source.innerHTML = "";
-
-    if (wordFromData.sourceUrls) {
-      wordFromData.sourceUrls.forEach((sourceUrl) => {
-        source.href = sourceUrl;
-        source.textContent = sourceUrl;
-      });
-    } else {
-      source.href = "";
-      source.textContent = "😕 oops no source is available";
-    }
-  };
-
-  // Function to toggle dropdown
-  const toggleDropdown = () => {
-    isToggle = !isToggle;
-    console.log(isToggle);
-
-    if (isToggle) {
-      dropdownSection.classList.remove("hidden");
-      dropdownSection.classList.add("flex");
-    } else {
-      dropdownSection.classList.add("hidden");
-      dropdownSection.classList.remove("flex");
     }
   };
 
@@ -174,20 +78,20 @@ document.addEventListener("DOMContentLoaded", () => {
         search.classList.remove("border-[1px]", "border-[#FF5252]");
         errorText.innerHTML = "";
       } else {
-        console.log("Enter a valid word");
         error = "Whoops can't be empty";
         search.classList.remove("focus:border-[1px]", "focus:border-[#A445ED]");
         search.classList.add("border-[1px]", "border-[#FF5252]");
         errorText.innerText = error;
         mainSection.classList.add("hidden");
-        console.log(mainSection);
       }
     }
   };
 
   // Event listeners and functions
   search.addEventListener("keydown", handleSubmit);
-  dropdownToggle.addEventListener("click", toggleDropdown);
+  dropdownToggle.addEventListener("click", () =>
+    toggleDropdown(dropdownSection)
+  );
   serifFont.addEventListener("click", () => switchFont("font-Lora"));
   monoFont.addEventListener("click", () => switchFont("font-inconsolata"));
   sansSerifFont.addEventListener("click", () => switchFont("font-Inter"));
