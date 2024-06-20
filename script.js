@@ -95,7 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
   serifFont.addEventListener("click", () => switchFont("font-Lora"));
   monoFont.addEventListener("click", () => switchFont("font-inconsolata"));
   sansSerifFont.addEventListener("click", () => switchFont("font-Inter"));
-  darkModeToggle.addEventListener("click", () => toggleTheme());
+  darkModeToggle.addEventListener("click", () =>
+    toggleTheme(darkModeToggleCheckbox)
+  );
   darkModeToggleCheckbox.addEventListener("change", () =>
     toggleCheckboxTheme(darkModeToggleCheckbox)
   );
