@@ -1,4 +1,5 @@
 "use strict";
+
 import {
   displayDefinitions,
   displaySourceUrl,
@@ -7,8 +8,42 @@ import {
 } from "./display.js";
 import { applySavedFont, switchFont } from "./font.js";
 import { loadSound } from "./sound.js";
-import { toggleCheckboxTheme, toggleTheme, applyTheme } from "./theme.js";
 import { toggleDropdown } from "./toggle.js";
+import { toggleCheckboxTheme, toggleTheme, applyTheme } from "./theme.js";
+
+var __awaiter =
+  (this && this.__awaiter) ||
+  function (thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P
+        ? value
+        : new P(function (resolve) {
+            resolve(value);
+          });
+    }
+    return new (P || (P = Promise))(function (resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done
+          ? resolve(result.value)
+          : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  };
 
 document.addEventListener("DOMContentLoaded", () => {
   // Get important DOM elements
@@ -28,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let mainSection = document.getElementById("main-section");
   let errorText = document.getElementById("error-element");
   let error404 = document.getElementById("404-error");
-  let error = "";
   let dropdownToggle = document.getElementById("dropdown-toggle");
   let dropdownSection = document.getElementById("dropdown-section");
   let sansSerifFont = document.getElementById("sans-serif");
@@ -39,36 +73,35 @@ document.addEventListener("DOMContentLoaded", () => {
     "dark-mode-toggle-checkbox"
   );
   let isToggle = false;
-
-
+  let error;
   // Fetch the word using the search value as reference
-  const fetchWord = async function (value) {
-    try {
-      const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${value}`;
-      const response = await fetch(url);
-      const data = await response.json();
-
-      console.log(data);
-      if (!response.ok) {
-        throw new Error("Network response was not okay");
+  const fetchWord = function (value) {
+    return __awaiter(this, void 0, void 0, function* () {
+      try {
+        const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${value}`;
+        const response = yield fetch(url);
+        const data = yield response.json();
+        if (!response.ok) {
+          throw new Error("Network response was not okay");
+        }
+        error404.classList.add("hidden");
+        mainSection.classList.add("block");
+        displayDefinitions(data, mainText, definitionsContainer, phonetics);
+        displayVerb(data, meaning, verbContainer, example);
+        displaySynonyms(data, synonymText);
+        displaySourceUrl(data, source);
+        loadSound(data, audioElement, playContainer, playButton, pauseButton);
+      } catch (err) {
+        const error = "An error occurred ";
+        error404.classList.remove("hidden");
+        mainSection.classList.add("hidden");
+        error404.classList.add("flex");
+        if (err instanceof Error) {
+          console.error(err);
+        }
       }
-
-      error404.classList.add("hidden");
-      mainSection.classList.add("block");
-
-      displayDefinitions(data, mainText, definitionsContainer, phonetics);
-      displayVerb(data, meaning, verbContainer, example);
-      displaySynonyms(data, synonymText);
-      displaySourceUrl(data, source);
-      loadSound(data, audioElement, playContainer, playButton, pauseButton);
-    } catch (err) {
-      console.log(err);
-      error404.classList.remove("hidden");
-      mainSection.classList.add("hidden");
-      error404.classList.add("flex");
-    }
+    });
   };
-
   //fuction to handle submission
   const handleSubmit = (e) => {
     if (e.key === "Enter") {
@@ -88,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   };
-
   // Event listeners and functions
   search.addEventListener("keydown", handleSubmit);
   dropdownToggle.addEventListener("click", () =>
